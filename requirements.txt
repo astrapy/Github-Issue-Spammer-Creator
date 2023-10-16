@@ -1,0 +1,6 @@
+aiohttp
+asyncio
+json
+random
+colorama
+pystyle
