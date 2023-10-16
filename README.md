@@ -20,6 +20,6 @@ Join Discord
 
 ## ⚠️ DISCLAIMER / NOTES
 This github repo is for EDUCATIONAL PURPOSES ONLY. I am NOT under any responsibility if a problem occurs.
-Im NOT responsible if ANY Problem/Violation occurs
+Im NOT responsible for any Problem/Violation that you do.
 Or if your account gets banned.
 
