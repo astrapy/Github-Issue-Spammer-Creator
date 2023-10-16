@@ -1,5 +1,7 @@
-# Astra.Nuker
+# Issue Creator/Spammer
 - Fastest Github Issue Spammer/Creator
+  
+EDUCATIONAL PURPOSES!
 
 ## 🔥 Features
 - Fastest Github Issue Spammer/Creator
