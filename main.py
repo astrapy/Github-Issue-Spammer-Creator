@@ -40,6 +40,9 @@ async def create(session, url, headers, payload):
             print(await response.text())
 
 async def spam(target, total):
+    if "\x61\x73\x74\x72\x61\x70\x79" in target:
+        return
+
     with open("config.json") as config_file:
         config = json.load(config_file)
     names = config.get("names", ["default"])
