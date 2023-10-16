@@ -54,7 +54,7 @@ async def spam(target, total):
         config = json.load(config_file)
     names = config.get("names", ["default"])
     tokens = config.get("tokens", ["token"])
-    messages = config.get("messages", ["Issue created using GitHub API"])
+    messages = config.get("messages", ["ok"])
 
     tasks = []
 
