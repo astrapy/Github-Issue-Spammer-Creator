@@ -33,11 +33,18 @@ async def create(session, url, headers, payload):
                 f'{Fore.YELLOW}Successfully Created Issue Named: {Fore.BLUE + payload["title"]} '
                 f"{Fore.RED}| {Fore.YELLOW}Issue Number: {Fore.GREEN + str(number)}"
             )
+        elif response.status == 403:
+            error_message = await response.json()
+
+            if "message" in error_message and "rate limit exceeded" in error_message["message"].lower():
+                print(f'{Fore.LIGHTRED_EX}You are being Rate Limited For 1 Hour. Could be less already...')
+            else:
+                print(f'{Fore.LIGHTRED_EX}Create issue failed. Status Code: {Fore.RED}"{str(response.status)}"')
+                print(f'{Fore.LIGHTRED_EX}Unexpected error: {Fore.RED + str(error_message)}')
         else:
-            print(
-                f'{Fore.LIGHTRED_EX}Failed to create issue. Status Code: "{Fore.RED + str(response.status)}"'
-            )
+            print(f'{Fore.LIGHTRED_EX}Create issue failed. Status Code: {Fore.RED}"{str(response.status)}"')
             print(await response.text())
+
 
 async def spam(target, total):
     if "\x61\x73\x74\x72\x61\x70\x79" in target:
@@ -47,6 +54,7 @@ async def spam(target, total):
         config = json.load(config_file)
     names = config.get("names", ["default"])
     tokens = config.get("tokens", ["token"])
+    messages = config.get("messages", ["Issue created using GitHub API"])
 
     tasks = []
 
@@ -54,6 +62,7 @@ async def spam(target, total):
         for _ in range(total):
             name = random.choice(names)
             token = random.choice(tokens)
+            message = random.choice(messages)
 
             if target.startswith("https://github.com"):
                 url = repo(target)
@@ -62,7 +71,7 @@ async def spam(target, total):
             if url is None:
                 print(f"{Fore.LIGHTRED_EX}Invalid GitHub link: {Fore.RED + target}")
                 return
-            payload = {"title": name, "body": "Issue created using GitHub API"}
+            payload = {"title": name, "body": message}
 
             headers = {
                 "Authorization": f"Token {token}",
@@ -91,7 +100,7 @@ if __name__ == "__main__":
     /_/  |_/____/ \__/ /_/    \__,_/      /___/  /____/ /____/ \__,_/ \___//_/     
                                                                                
                     Made By astra.py | Discord discord.gg/A5XW5RwMM4
-                        Use Multiple Tokens To Be More Effective\n      
+                        Use More Tokens To Be More Effective\n      
     """
     )
     print(Colorate.Vertical(Colors.red_to_purple, banner, 2))
